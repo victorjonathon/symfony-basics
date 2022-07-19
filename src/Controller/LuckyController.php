@@ -12,10 +12,11 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class LuckyController extends AbstractController
 {
     /**
-     *  @Route("lucky/number/{max}", name="app_lucky_number", methods={"GET","HEAD"})
+     *  @Route("lucky/number/{max?}", name="app_lucky_number", methods={"GET","HEAD"})
      */
-    public function number(int $max, Request $request): Response
+    public function number(int $max=null, Request $request): Response
     {
+        $max = $max > 1 ? $max : 100;
         $number = random_int(0, $max);
         return $this->render('lucky/number.html.twig', [
             'number' => $number,
