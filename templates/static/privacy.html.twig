@@ -1,6 +1,24 @@
 <html>
-<body>
-    <h1>Terms & Conditions for {{ site_name }}</h1>
-    <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quae nesciunt voluptatum consequatur voluptatibus architecto? Fuga tempore saepe magni dicta ipsum repudiandae laudantium, fugit facilis sapiente tempora aut eum maxime!</h5>
-</body>
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+    </head>
+    <body>
+        {{ include('elements/navbar.html.twig') }}
+
+        <div class="container">
+            <h1> Privacy policy for {{ site_name }}</h1>
+            <hr>
+            <div class="row col-md-12">
+                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, adipisci recusandae? Reprehenderit suscipit quos ut eaque aut neque facilis error perspiciatis temporibus excepturi assumenda accusamus perferendis, culpa quo saepe sint?
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim veniam praesentium error nostrum, aspernatur accusantium animi, est sint unde sequi atque rem! Iusto quia doloremque dolores ipsa? Possimus, nihil quibusdam?</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, adipisci recusandae? Reprehenderit suscipit quos ut eaque aut neque facilis error perspiciatis temporibus excepturi assumenda accusamus perferendis, culpa quo saepe sint?
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim veniam praesentium error nostrum, aspernatur accusantium animi, est sint unde sequi atque rem! Iusto quia doloremque dolores ipsa? Possimus, nihil quibusdam?</p>
+                
+            </div>
+            
+        </div>
+        
+    </body>
 </html>
