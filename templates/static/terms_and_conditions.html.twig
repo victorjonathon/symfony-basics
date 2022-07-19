@@ -1,17 +1,46 @@
 <html>
     <head>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
     </head>
     <body>
-        <div style="width:100%">
-            <a style="padding-right:10px;" href="{{path('app_lucky_number')}}">Lucky Number</a>
-            <a style="padding-right:10px;" href="/">Home</a>
-            <a style="padding-right:10px;" href="{{ path('terms-and-conditions') }}">Terms&Conditions</a>
-        </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Symfony</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{path('app_lucky_number')}}">Lucky Number</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{{path('terms-and-conditions')}}">Terms&Conditions</a>
+                  </li>
+                  
+                </ul>
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+        </nav>
 
-        <h1>Terms and Conditions</h1>
-        <hr><br>
-        <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, adipisci recusandae? Reprehenderit suscipit quos ut eaque aut neque facilis error perspiciatis temporibus excepturi assumenda accusamus perferendis, culpa quo saepe sint?
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim veniam praesentium error nostrum, aspernatur accusantium animi, est sint unde sequi atque rem! Iusto quia doloremque dolores ipsa? Possimus, nihil quibusdam?</h4>
+        <div class="container">
+            <h1>Terms and Conditions</h1>
+            <hr><br>
+            <div>
+                <img width="250" src="{{ asset('images/sample.jpg') }}" alt="sample">
+            </div>
+            <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, adipisci recusandae? Reprehenderit suscipit quos ut eaque aut neque facilis error perspiciatis temporibus excepturi assumenda accusamus perferendis, culpa quo saepe sint?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim veniam praesentium error nostrum, aspernatur accusantium animi, est sint unde sequi atque rem! Iusto quia doloremque dolores ipsa? Possimus, nihil quibusdam?</h4>
+        </div>
+        
     </body>
 </html>
