@@ -39,6 +39,24 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @ return Product[]
+     */
+    public function findAllGreaterThanPrice(int $price): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Product p
+            WHERE p.price >= :price
+            ORDER BY p.price ASC'
+        )->setParameter('price', $price);
+
+        //return an array of product object
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */
