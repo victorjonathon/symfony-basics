@@ -1,11 +1,6 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+{% extends "base.html.twig" %}
 
-    </head>
-    <body>
-        {{ include('elements/navbar.html.twig') }}
+{% block body %}
 
         <div class="container">
             <h1>Terms and Conditions</h1>
@@ -24,6 +19,4 @@
             </div>
             
         </div>
-        
-    </body>
-</html>
+{% endblock %}
