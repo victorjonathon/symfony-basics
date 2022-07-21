@@ -35,17 +35,20 @@ class ProductController extends AbstractController
     public function add(ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
-        $catId = 5;
-        $category = $entityManager->getRepository(Category::class)->find($catId);
+        $catName = 'furniture';
+        $category = $entityManager->getRepository(Category::class)->findOneBy(['name'=>$catName]);
+        if(!$category){
+            $category = new Category();
+            $category->setName($catName);
+            $entityManager->persist($category);
+        }
+        //dd($category); die;
         
-        //$category = new Category();
-        //$category->setName('computer');
-        //$entityManager->persist($category);
 
         $product = new Product();
-        $product->setName('RAM');
-        $product->setPrice(2500);
-        $product->setDescription('DDR 3 compact size RAM 4GB');
+        $product->setName('Working Chair');
+        $product->setPrice(1000);
+        $product->setDescription('Workign chair with head and neck rest.');
         
         $product->setCategory($category);
 
