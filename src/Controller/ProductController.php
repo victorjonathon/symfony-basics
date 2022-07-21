@@ -54,7 +54,8 @@ class ProductController extends AbstractController
         $entityManager->persist($product);
         $entityManager->flush();
 
-        return new Response('New product saved with id: '.$product->getId());
+        $this->addFlash('success', 'New product saved with id: '.$product->getId());
+        return $this->redirectToRoute('app_product');
     }
 
     /**
@@ -92,6 +93,7 @@ class ProductController extends AbstractController
         $entityManager->remove($product);
         $entityManager->flush();
 
-        return $this->forward('App\Controller\ProductController::index');
+        $this->addFlash('success', 'Product deleted successfully!');
+        return $this->redirectToRoute('app_product');
     }
 }
