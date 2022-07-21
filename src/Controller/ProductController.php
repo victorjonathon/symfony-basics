@@ -42,9 +42,7 @@ class ProductController extends AbstractController
             $category->setName($catName);
             $entityManager->persist($category);
         }
-        //dd($category); die;
         
-
         $product = new Product();
         $product->setName('Working Chair');
         $product->setPrice(1000);
