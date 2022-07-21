@@ -70,7 +70,9 @@ class ProductController extends AbstractController
                 'No product found for id: '.$id
             );
         }
-        return new Response('The product is: '.$product->getName());
+        return $this->render('product/show.html.twig', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -90,6 +92,6 @@ class ProductController extends AbstractController
         $entityManager->remove($product);
         $entityManager->flush();
 
-        return new Response('Product deleted successfully!');
+        return $this->forward('App\Controller\ProductController::index');
     }
 }
