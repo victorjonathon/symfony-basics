@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product; 
 use App\Entity\Category;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Form\Type\ProductType;
 
 class ProductController extends AbstractController
 {
@@ -30,9 +32,24 @@ class ProductController extends AbstractController
     }
 
     /**
+     * @Route("/product/new", name="new_product_form")
+     */
+    public function new(Request $request): Response
+    {
+       $product = new Product();
+       $form = $this->createForm(ProductType::class, $product, [
+        'action' => $this->generateUrl('product_add'),
+       ]);
+      
+       return $this->renderForm('product/new.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    /**
      * @Route("/product/add", name="product_add")
      */
-    public function add(ManagerRegistry $doctrine): Response
+    public function add(ManagerRegistry $doctrine, Request $request): Response
     {
         $entityManager = $doctrine->getManager();
         $catName = 'furniture';
