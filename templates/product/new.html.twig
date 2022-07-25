@@ -1,1 +1,56 @@
-{{ form(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}Add New Products{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>New Product</h1>
+    {{ form_start(form) }}
+    <div class="row g-3 mb-3 align-items-center">
+        <div class="col-md-1">
+            {{ form_label(form.name) }}
+        </div>
+        <div class="col-md-4">
+         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3 align-items-center">
+        <div class="col-md-1">
+            {{ form_label(form.price) }}
+        </div>
+        <div class="col-md-4">
+         {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3 align-items-center">
+        <div class="col-md-1">
+            {{ form_label(form.description) }}
+        </div>
+        <div class="col-md-4">
+         {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3 align-items-center">
+        <div class="col-md-1">
+            {{ form_label(form.category) }}
+        </div>
+        <div class="col-md-4">
+         {{ form_widget(form.category, {'attr': {'class': 'form-select'}}) }}
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3 align-items-center">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.save, { 'label': 'Add Product', 'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+    </div>
+    
+    
+    {{ form_end(form) }}
+</div>
+{% endblock %}
