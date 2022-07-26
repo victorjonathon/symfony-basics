@@ -26,12 +26,12 @@ class ProductType extends AbstractType
             ->add('name', TextType::class)
             ->add('price', NumberType::class)
             ->add('description', TextType::class)
-            ->add('category', ChoiceType::class, [
+            /*->add('category', ChoiceType::class, [
                 'choices' => [
-                    'computer' => 'computer',
-                    'furniture' => 'furniture',
+                    'computer' => 5,
+                    'furniture' => 8,
                 ],
-            ])
+            ])*/
             ->add('save', SubmitType::class)
         ;
     }

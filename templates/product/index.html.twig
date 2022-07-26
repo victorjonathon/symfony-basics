@@ -10,7 +10,9 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}
-    <h1>Products</h1>
+    <h1 class="mt-2">Products
+        <a href="{{ path('product_add') }}" class="btn btn-success float-end">Add New</a>
+    </h1>
     <table class="table table-dark">
         <thead>
           <tr>

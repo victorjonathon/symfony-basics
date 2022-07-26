@@ -32,47 +32,40 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/new", name="new_product_form")
-     */
-    public function new(Request $request): Response
-    {
-       $product = new Product();
-       $form = $this->createForm(ProductType::class, $product, [
-        'action' => $this->generateUrl('product_add'),
-       ]);
-      
-       return $this->renderForm('product/new.html.twig', [
-            'form' => $form,
-        ]);
-    }
-
-    /**
      * @Route("/product/add", name="product_add")
      */
     public function add(ManagerRegistry $doctrine, Request $request): Response
     {
-        $entityManager = $doctrine->getManager();
-        $catName = 'furniture';
-        $category = $entityManager->getRepository(Category::class)->findOneBy(['name'=>$catName]);
-        if(!$category){
-            $category = new Category();
-            $category->setName($catName);
-            $entityManager->persist($category);
-        }
-        
         $product = new Product();
-        $product->setName('Working Chair');
-        $product->setPrice(1000);
-        $product->setDescription('Workign chair with head and neck rest.');
-        
-        $product->setCategory($category);
+        $form = $this->createForm(ProductType::class, $product, [
+         'action' => $this->generateUrl('product_add'),
+        ]);
 
-        
-        $entityManager->persist($product);
-        $entityManager->flush();
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $product = $form->getData();
+            dd($product); die;
+            $entityManager = $doctrine->getManager();
+            $catName = 'computer';
+            $category = $entityManager->getRepository(Category::class)->findOneBy(['name'=>$catName]);
+            if(!$category){
+                $category = new Category();
+                $category->setName($catName);
+                $entityManager->persist($category);
+            }
+            
+            $product->setCategory($category);
 
-        $this->addFlash('success', 'New product saved with id: '.$product->getId());
-        return $this->redirectToRoute('app_product');
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'New product saved with id: '.$product->getId());
+            return $this->redirectToRoute('app_product');
+        }
+
+        return $this->renderForm('product/new.html.twig', [
+            'form' => $form,
+        ]);
     }
 
     /**
