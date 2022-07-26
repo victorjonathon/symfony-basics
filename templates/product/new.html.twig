@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    {# <div class="row g-3 mb-3 align-items-center">
+    {#<div class="row g-3 mb-3 align-items-center">
         <div class="col-md-1">
             {{ form_label(form.category) }}
         </div>
@@ -41,6 +41,15 @@
          {{ form_widget(form.category, {'attr': {'class': 'form-select'}}) }}
         </div>
     </div> #}
+
+    <div class="row g-3 mb-3 align-items-center">
+        <div class="col-md-1">
+            {{ form_label(form.image) }}
+        </div>
+        <div class="col-md-4">
+         {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
 
     <div class="row g-3 mb-3 align-items-center">
         <div class="col-md-1">

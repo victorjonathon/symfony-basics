@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,6 +11,7 @@ use App\Entity\Product;
 use App\Entity\Category;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Form\Type\ProductType;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProductController extends AbstractController
 {
@@ -34,7 +36,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/add", name="product_add")
      */
-    public function add(ManagerRegistry $doctrine, Request $request): Response
+    public function add(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product, [
@@ -44,7 +46,25 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $product = $form->getData();
-            dd($product); die;
+            $productImage = $form->get('image')->getData();
+
+            if($productImage){
+                $originalFilename = pathinfo($productImage->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$productImage->guessExtension();
+            }
+
+            // Move the file to the directory where brochures are stored
+            try {
+                $productImage->move(
+                    'product_images',
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+
             $entityManager = $doctrine->getManager();
             $catName = 'computer';
             $category = $entityManager->getRepository(Category::class)->findOneBy(['name'=>$catName]);
@@ -55,6 +75,7 @@ class ProductController extends AbstractController
             }
             
             $product->setCategory($category);
+            $product->setImage($newFilename);
 
             $entityManager->persist($product);
             $entityManager->flush();
