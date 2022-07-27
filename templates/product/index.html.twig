@@ -17,10 +17,10 @@
         <thead>
           <tr>
             <th scope="col">#</th>
+            <th scope="col">Image</th>
             <th scope="col">Title</th>
             <th scope="col">Price</th>
             <th scope="col">Category</th>
-            <th scope="col">Description</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -29,9 +29,16 @@
                 <tr>
                     <th scope="row">{{ loop.index }}</th>
                     <td>{{ product.name }}</td>
+                    <td>
+                        {% if product.image %}
+                            <img style="width: 60px;" src="{{ asset('product_images/' ~ product.image) }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img style="width: 60px;" src="{{ asset('product_images/dummy_product_image.jpg') }}" alt="{{ product.name }}">
+                        {% endif %}
+                        
+                    </td>
                     <td>{{ product.price }}</td>
                     <td>{{ product.category.name }}</td>
-                    <td>{{ product.description }}</td>
                     <td>
                         <a href="{{ path('product_show', {id: product.id}) }}" class="btn btn-sm btn-success">View</a>
                         <a href="{{ path('product_delete', {id: product.id}) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are u sure?')">Delete</a>
